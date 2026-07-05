@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ad günün mübarək 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+
+
+<style>
+  :root{
+    --bg-deep:#1c0f28;
+    --bg-deep-2:#2f1a3f;
+    --bg-card:#3a2050;
+    --gold:#f5b942;
+    --gold-soft:#ffd77a;
+    --pink:#ff6f9c;
+    --mint:#57e8c8;
+    --cream:#fbf3e7;
+    --cream-dim:rgba(251,243,231,0.72);
+    --font-display:'Fredoka', sans-serif;
+    --font-body:'Nunito', sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg-deep);
+    color:var(--cream);
+    font-family:var(--font-body);
+    overflow-x:hidden;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  body{
+    background:
+      radial-gradient(circle at 12% 8%, rgba(255,255,255,0.55) 0 1.5px, transparent 2px),
+      radial-gradient(circle at 78% 14%, rgba(255,255,255,0.4) 0 1.5px, transparent 2px),
+      radial-gradient(circle at 34% 22%, rgba(255,255,255,0.5) 0 1px, transparent 2px),
+      radial-gradient(circle at 88% 40%, rgba(255,255,255,0.35) 0 1.5px, transparent 2px),
+      radial-gradient(circle at 6% 55%, rgba(255,255,255,0.4) 0 1px, transparent 2px),
+      radial-gradient(circle at 60% 6%, rgba(255,255,255,0.45) 0 1.5px, transparent 2px),
+      radial-gradient(circle at 92% 70%, rgba(255,255,255,0.3) 0 1px, transparent 2px),
+      linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-deep-2) 55%, var(--bg-deep) 100%);
+    background-attachment:fixed;
+  }
+
+  #confetti-canvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:50;
+  }
+
+  main{
+    position:relative;
+    z-index:1;
+    max-width:600px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+
+  section{
+    padding:64px 0 48px;
+  }
+
+
+
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding-top:env(safe-area-inset-top);
+    padding-bottom:24px;
+  }
+
+  .moon{
+    position:absolute;
+    top:calc(28px + env(safe-area-inset-top));
+    right:24px;
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background:var(--gold-soft);
+    box-shadow: -14px 0 0 -4px var(--bg-deep), 0 0 24px rgba(255,215,122,0.5);
+    opacity:0.9;
+  }
+
+  .cake-wrap{
+    margin-bottom:18px;
+    animation:cake-in 900ms cubic-bezier(.2,.9,.3,1.3) both;
+  }
+
+  @keyframes cake-in{
+    from{ transform:scale(0.6) translateY(30px); opacity:0; }
+    to{ transform:scale(1) translateY(0); opacity:1; }
+  }
+
+  .cake{
+    position:relative;
+    width:min(72vw, 240px);
+    margin:0 auto;
+    cursor:pointer;
+    user-select:none;
+  }
+
+  .candle-row{
+    display:flex;
+    justify-content:center;
+    gap:14%;
+    position:relative;
+    z-index:3;
+    height:46px;
+  }
+
+  .candle{
+    position:relative;
+    width:8px;
+    height:34px;
+    border-radius:2px;
+    background:repeating-linear-gradient(180deg, var(--mint) 0 6px, var(--cream) 6px 12px);
+    align-self:flex-end;
+  }
+
+  .flame{
+    position:absolute;
+    left:50%;
+    bottom:100%;
+    width:12px;
+    height:20px;
+    transform:translateX(-50%);
+    border-radius:60% 60% 60% 60% / 80% 80% 40% 40%;
+    background:radial-gradient(circle at 50% 70%, #fff6cf 0%, var(--gold) 45%, #e2661f 100%);
+    box-shadow:0 0 12px 4px rgba(245,185,66,0.55), 0 0 22px 8px rgba(226,102,31,0.25);
+    transform-origin:50% 90%;
+    animation:flicker 1.6s ease-in-out infinite;
+  }
+  .candle:nth-child(1) .flame{ animation-delay:0s; }
+  .candle:nth-child(2) .flame{ animation-delay:0.3s; }
+  .candle:nth-child(3) .flame{ animation-delay:0.15s; }
+  .candle:nth-child(4) .flame{ animation-delay:0.45s; }
+  .candle:nth-child(5) .flame{ animation-delay:0.6s; }
+
+  @keyframes flicker{
+    0%,100%{ transform:translateX(-50%) rotate(-2deg) scale(1); }
+    25%{ transform:translateX(-50%) rotate(3deg) scale(0.94); }
+    50%{ transform:translateX(-50%) rotate(-1deg) scale(1.06); }
+    75%{ transform:translateX(-50%) rotate(2deg) scale(0.97); }
+  }
+
+  .layer{
+    position:relative;
+    border-radius:10px 10px 4px 4px;
+    z-index:2;
+  }
+
+  .layer.top{
+    height:38px;
+    margin:0 20%;
+    background:linear-gradient(180deg, var(--pink) 0%, #e85586 100%);
+  }
+  .layer.top::before{
+    content:"";
+    position:absolute;
+    top:-9px;
+    left:0; right:0;
+    height:18px;
+    background:
+      radial-gradient(circle at 10% 60%, var(--cream) 0 7px, transparent 7.5px),
+      radial-gradient(circle at 30% 60%, var(--cream) 0 7px, transparent 7.5px),
+      radial-gradient(circle at 50% 60%, var(--cream) 0 7px, transparent 7.5px),
+      radial-gradient(circle at 70% 60%, var(--cream) 0 7px, transparent 7.5px),
+      radial-gradient(circle at 90% 60%, var(--cream) 0 7px, transparent 7.5px);
+  }
+
+  .layer.bottom{
+    height:58px;
+    margin-top:6px;
+    background:linear-gradient(180deg, var(--gold) 0%, #d99527 100%);
+  }
+  .layer.bottom::before{
+    content:"";
+    position:absolute;
+    top:-9px;
+    left:0; right:0;
+    height:18px;
+    background:
+      radial-gradient(circle at 6% 60%, var(--cream) 0 7px, transparent 7.5px),
+      radial-gradient(circle at 22% 60%, var(--cream) 0 7px, transparent 7.5px),
+      radial-gradient(circle at 38% 60%, var(--cream) 0 7px, transparent 7.5px),
+      radial-gradient(circle at 54% 60%, var(--cream) 0 7px, transparent 7.5px),
+      radial-gradient(circle at 70% 60%, var(--cream) 0 7px, transparent 7.5px),
+      radial-gradient(circle at 86% 60%, var(--cream) 0 7px, transparent 7.5px),
+      radial-gradient(circle at 100% 60%, var(--cream) 0 7px, transparent 7.5px);
+  }
+
+  .sprinkle{
+    position:absolute;
+    width:6px; height:3px;
+    border-radius:2px;
+    z-index:3;
+  }
+
+  .plate{
+    height:12px;
+    border-radius:50%;
+    margin-top:2px;
+    background:radial-gradient(ellipse at center, rgba(255,255,255,0.18), transparent 70%);
+    box-shadow:0 0 0 1px rgba(255,255,255,0.06);
+  }
+
+  .headline{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(2.1rem, 8vw, 3rem);
+    line-height:1.1;
+    margin:6px 0 4px;
+    letter-spacing:-0.5px;
+    background:linear-gradient(180deg, var(--cream) 0%, var(--gold-soft) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  .headline span{
+    display:block;
+    font-size:0.5em;
+    font-weight:600;
+    color:var(--pink);
+    -webkit-text-fill-color:var(--pink);
+    margin-top:4px;
+  }
+
+  .sub{
+    font-size:1.05rem;
+    color:var(--cream-dim);
+    margin:6px 0 26px;
+  }
+
+  .btn{
+    font-family:var(--font-body);
+    font-weight:800;
+    font-size:1rem;
+    color:var(--bg-deep);
+    background:linear-gradient(180deg, var(--gold-soft), var(--gold));
+    border:none;
+    padding:14px 28px;
+    border-radius:999px;
+    box-shadow:0 8px 20px rgba(245,185,66,0.35);
+    cursor:pointer;
+    min-height:48px;
+    transition:transform 150ms ease;
+  }
+  .btn:active{ transform:scale(0.95); }
+
+  .scroll-hint{
+    margin-top:34px;
+    font-size:0.82rem;
+    color:var(--cream-dim);
+    animation:bob 2.2s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{ transform:translateY(0); opacity:0.6; }
+    50%{ transform:translateY(6px); opacity:1; }
+  }
+
+
+  .card{
+    background:var(--bg-card);
+    border-radius:24px;
+    padding:36px 26px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.35);
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:5px;
+    background:linear-gradient(90deg, var(--pink), var(--gold), var(--mint));
+  }
+
+  .eyebrow{
+    font-family:var(--font-body);
+    font-weight:800;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    color:var(--mint);
+    margin:0 0 10px;
+  }
+
+  .card h2{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(1.5rem, 6vw, 1.9rem);
+    margin:0 0 18px;
+    color:var(--gold-soft);
+  }
+
+  .card p{
+    font-size:1.02rem;
+    line-height:1.7;
+    color:var(--cream);
+    margin:0 0 16px;
+  }
+
+  .signature{
+    font-family:var(--font-display);
+    font-size:1.1rem;
+    color:var(--pink);
+    margin-top:22px !important;
+    text-align:right;
+  }
+
+
+
+  .wishes h2{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(1.5rem, 6vw, 1.9rem);
+    text-align:center;
+    margin-bottom:26px;
+    color:var(--cream);
+  }
+
+  .wish-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .wish-list li{
+    background:var(--bg-card);
+    border-radius:16px;
+    padding:16px 18px;
+    font-size:1rem;
+    line-height:1.5;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+  }
+
+  .wish-emoji{ font-size:1.3rem; line-height:1; }
+
+
+
+  .outro{
+    text-align:center;
+    padding-bottom:80px;
+  }
+  .outro h2{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(1.6rem,7vw,2.1rem);
+    color:var(--gold-soft);
+    margin:20px 0 26px;
+  }
+
+  .mini-cake{
+    width:min(50vw, 160px);
+    margin:0 auto 6px;
+  }
+  .mini-cake .candle-row{ height:34px; gap:16%; }
+  .mini-cake .candle{ height:24px; }
+  .mini-cake .layer.top{ height:26px; }
+  .mini-cake .layer.bottom{ height:40px; }
+
+
+
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 700ms ease, transform 700ms ease;
+  }
+  .reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .flame{ animation:none; }
+    .scroll-hint{ animation:none; }
+    .cake-wrap{ animation:none; }
+    .reveal{ transition:opacity 300ms ease; transform:none; }
+  }
+
+  @media (min-width:640px){
+    section{ padding:88px 0 64px; }
+    .card{ padding:48px 44px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<main>
+
+  <section class="hero">
+    <div class="moon"></div>
+
+    <div class="cake-wrap">
+      <div class="cake" id="cake">
+        <div class="candle-row">
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+        </div>
+        <div class="layer top"></div>
+        <div class="layer bottom"></div>
+        <div class="plate"></div>
+      </div>
+    </div>
+
+    <h1 class="headline">Ad günün mübarək<span></span></h1>
+    <p class="sub">Bu gün sənin günün 🎉</p>
+
+    <button class="btn" id="confetti-btn">Konfeti partlat 🎊</button>
+
+    <div class="scroll-hint">aşağı kaydır ↓</div>
+  </section>
+
+  <section class="card reveal">
+    <p class="eyebrow">Sənə bir sözüm var</p>
+    <h2>Bu gün sənin günün!</h2>
+    <p>
+      Uşaqlığımızda bəri bir birimizi qırdıq, savaşdıq amma həmişə bir birimizə döndük.
+    </p>
+    <p>
+      Bu yeni yaşını təbrik edirəm. Həyatın sənə ən gözəl sürprizlərini gətirsin. Hər zaman xoşbəxt olasan.
+    </p>
+    <p>
+      Yaxşı ki doğulmusan
+    </p>
+    <p class="signature">— Böyük qardaşın</p>
+  </section>
+
+  <section class="wishes reveal">
+    <h2>Bu yeni yaşın uğur gətirsin...</h2>
+    <ul class="wish-list">
+      <li><span class="wish-emoji">🌟</span><span>Xəyallarının ardın getmək üçün əlindən gələni et. Bir gün gerçək olacaq</span></li>
+      <li><span class="wish-emoji">💛</span><span>Bizim üçün vazkeçilməzsən</span></li>
+      <li><span class="wish-emoji">🍀</span><span>Hər çətinlikdə yanındayıq</span></li>
+      <li><span class="wish-emoji">😄</span><span>Gülüşün heç əksik olmasın</span></li>
+    </ul>
+  </section>
+
+  <section class="outro reveal">
+    <div class="mini-cake cake" id="cake2">
+      <div class="candle-row">
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+      </div>
+      <div class="layer top"></div>
+      <div class="layer bottom"></div>
+      <div class="plate"></div>
+    </div>
+    <h2>Neçə belə gözəl yaşlara! 🎈</h2>
+    <button class="btn" id="confetti-btn-2">Tekrar Kutla 🎉</button>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const COLORS = ['#f5b942', '#ff6f9c', '#57e8c8', '#ffd77a', '#fbf3e7'];
+  let particles = [];
+  let rafId = null;
+
+  function Particle(x, y, angleSpread, upward){
+    const angle = upward
+      ? (Math.random() * angleSpread - angleSpread/2) - Math.PI/2
+      : Math.random() * Math.PI * 2;
+    const speed = 4 + Math.random() * 7;
+    this.x = x;
+    this.y = y;
+    this.vx = Math.cos(angle) * speed;
+    this.vy = Math.sin(angle) * speed;
+    this.size = 5 + Math.random() * 6;
+    this.color = COLORS[Math.floor(Math.random()*COLORS.length)];
+    this.shape = Math.random() > 0.5 ? 'rect' : 'circle';
+    this.rotation = Math.random() * Math.PI * 2;
+    this.rotationSpeed = (Math.random() - 0.5) * 0.3;
+    this.opacity = 1;
+    this.gravity = 0.18 + Math.random() * 0.08;
+    this.drag = 0.985;
+    this.life = 0;
+  }
+
+  function burstConfetti(x, y, count, upward){
+    if (reduceMotion) count = Math.min(count, 18);
+    for (let i = 0; i < count; i++){
+      particles.push(new Particle(x, y, Math.PI * 0.9, upward));
+    }
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  }
+
+  function tick(){
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    particles.forEach(p => {
+      p.vx *= p.drag;
+      p.vy = p.vy * p.drag + p.gravity;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rotation += p.rotationSpeed;
+      p.life += 1;
+      if (p.life > 90) p.opacity -= 0.02;
+
+      ctx.save();
+      ctx.globalAlpha = Math.max(p.opacity, 0);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation);
+      ctx.fillStyle = p.color;
+      if (p.shape === 'rect'){
+        ctx.fillRect(-p.size/2, -p.size/4, p.size, p.size/2);
+      } else {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size/2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    });
+
+    particles = particles.filter(p => p.opacity > 0 && p.y < window.innerHeight + 60);
+
+    if (particles.length > 0){
+      rafId = requestAnimationFrame(tick);
+    } else {
+      rafId = null;
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    }
+  }
+
+  function cannonBurst(){
+    const w = window.innerWidth;
+    const topY = -20;
+    burstConfetti(w * 0.12, topY, reduceMotion ? 20 : 60, true);
+    setTimeout(() => burstConfetti(w * 0.88, topY, reduceMotion ? 20 : 60, true), 160);
+    setTimeout(() => burstConfetti(w * 0.5, topY, reduceMotion ? 14 : 40, true), 320);
+  }
+
+  function burstFromElement(el){
+    const rect = el.getBoundingClientRect();
+    burstConfetti(rect.left + rect.width/2, rect.top + rect.height/2, reduceMotion ? 24 : 70, true);
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(cannonBurst, 300);
+  });
+
+  document.getElementById('confetti-btn').addEventListener('click', function(){
+    burstFromElement(this);
+  });
+  document.getElementById('confetti-btn-2').addEventListener('click', function(){
+    burstFromElement(this);
+  });
+  document.getElementById('cake').addEventListener('click', function(){
+    burstFromElement(this);
+  });
+  document.getElementById('cake2').addEventListener('click', function(){
+    burstFromElement(this);
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('visible'));
+  }
+})();
+</script>
+
+</body>
+</html>
